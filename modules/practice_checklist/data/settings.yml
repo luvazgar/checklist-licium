@@ -1,0 +1,8 @@
+- model: core.setting
+  ext_id: practice_checklist_auto_close_policy
+  fields:
+    key: practice_checklist.auto_close_policy
+    value: "manual"
+    value_type: choice
+    description: "Policy for automatic checklist closing"
+    category: "Practice Checklist"

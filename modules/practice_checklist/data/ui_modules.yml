@@ -2,6 +2,6 @@
   ext_id: practice_checklist_ui_module
   fields:
     slug: practice-checklist
-    name: Practice Checklist
-    description: "Módulo de ejemplo para prácticas de backend"
+    name: "Practice Checklist"
+    description: "Example module for backend practices"
     active: true

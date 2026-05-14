@@ -1,0 +1,75 @@
+practice_checklist:
+  module:
+    name: "Practice Checklist"
+    description: "Módulo de ejemplo para prácticas de backend"
+  views:
+    checklist_list: "Checklists - Lista"
+    checklist_form: "Checklist - Formulario"
+    item_list: "Ítems - Lista"
+    item_form: "Ítem - Formulario"
+   menu:
+     root: "Practice"
+     checklists: "Checklists"
+     items: "Ítems"
+   checklist:
+     name: "Checklist"
+     description: "Descripción de la checklist"
+     fields:
+       name: "Checklist"
+       description: "Descripción"
+       status: "Estado"
+       is_public: "Público"
+       owner: "Responsable"
+       closed_at: "Cerrado en"
+     choices:
+       status:
+         draft: "Borrador"
+         open: "Abierto"
+         closed: "Cerrado"
+     actions:
+       new: "Nuevo Checklist"
+       edit: "Editar"
+       delete: "Borrar"
+       close: "Cerrar"
+       reopen: "Reabrir"
+   checklist_item:
+     name: "Ítem"
+     note: "Nota"
+     fields:
+       title: "Ítem"
+       note: "Nota"
+       assigned_user: "Asignado a"
+       is_done: "Hecho"
+       done_at: "Hecho en"
+     actions:
+       new: "Nuevo Item"
+       edit: "Editar"
+       delete: "Borrar"
+       set_done: "Marcar como hecho"
+       mark_done: "Marcar hecho"
+       mark_pending: "Marcar pendiente"
+       bulk_set_done: "Marcar como hechos"
+       bulk_set_pending: "Marcar como pendientes"
+   ui:
+     actions:
+       new: "Nuevo"
+       edit: "Editar"
+       delete: "Borrar"
+       update_state: "Actualizar estado"
+   common:
+     actions:
+       new: "Nuevo"
+  settings:
+    auto_close_policy:
+      title: "Política de cierre automático"
+      description: "Política para el cierre automático de la checklist"
+      category: "Practice Checklist"
+      manual: "Manual"
+      auto_all_done: "Cerrar cuando todos los ítems estén hechos"
+  groups:
+    reader: "Practice checklist - Lectura"
+    manager: "Practice checklist - Gestión"
+  service_override:
+    user:
+      get_checklist_stats: "Obtener estadísticas de checklists"
+

@@ -1,8 +1,7 @@
 from __future__ import annotations
-import uuid
+
 from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, Text, Uuid
 from sqlalchemy.orm import backref, relationship
-from sqlalchemy.dialects.postgresql import UUID
 from app.core.base import Base
 from app.core.fields import field
 

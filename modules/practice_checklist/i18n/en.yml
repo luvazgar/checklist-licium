@@ -1,0 +1,75 @@
+practice_checklist:
+  module:
+    name: "Practice Checklist"
+    description: "Example module for backend practices"
+  views:
+    checklist_list: "Checklists - List"
+    checklist_form: "Checklist - Form"
+    item_list: "Items - List"
+    item_form: "Item - Form"
+   menu:
+     root: "Practice"
+     checklists: "Checklists"
+     items: "Items"
+   checklist:
+     name: "Checklist"
+     description: "Checklist description"
+     fields:
+       name: "Checklist"
+       description: "Description"
+       status: "Status"
+       is_public: "Public"
+       owner: "Owner"
+       closed_at: "Closed at"
+     choices:
+       status:
+         draft: "Draft"
+         open: "Open"
+         closed: "Closed"
+     actions:
+       new: "New Checklist"
+       edit: "Edit"
+       delete: "Delete"
+       close: "Close"
+       reopen: "Reopen"
+   checklist_item:
+     name: "Item"
+     note: "Note"
+     fields:
+       title: "Item title"
+       note: "Additional note"
+       assigned_user: "Assigned to"
+       is_done: "Done"
+       done_at: "Done at"
+     actions:
+       new: "New Item"
+       edit: "Edit"
+       delete: "Delete"
+       set_done: "Set done"
+       mark_done: "Mark done"
+       mark_pending: "Mark pending"
+       bulk_set_done: "Mark as done (bulk)"
+       bulk_set_pending: "Mark as pending (bulk)"
+   ui:
+     actions:
+       new: "New"
+       edit: "Edit"
+       delete: "Delete"
+       update_state: "Update state"
+   common:
+     actions:
+       new: "New"
+  settings:
+    auto_close_policy:
+      title: "Auto close policy"
+      description: "Policy for automatic checklist closing"
+      category: "Practice Checklist"
+      manual: "Manual"
+      auto_all_done: "Auto-close when all items done"
+  groups:
+    reader: "Practice checklist - Reader"
+    manager: "Practice checklist - Manager"
+  service_override:
+    user:
+      get_checklist_stats: "Get checklist statistics"
+

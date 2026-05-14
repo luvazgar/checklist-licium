@@ -7,7 +7,11 @@ data:
   - data/groups.yml
   - data/acl_rules.yml
   - data/ui_modules.yml
+  - data/settings.yml
   - views/views.yml
   - views/menu.yml
 migrations: {}
 post_init_hook: null
+service_overrides:
+  - service: core.services.user.UserService
+    override: modules.practice_checklist.services.overrides.UserServiceOverride

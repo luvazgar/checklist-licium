@@ -13,8 +13,6 @@ from ..models import PracticeChecklist, PracticeChecklistItem
 
 
 class PracticeChecklistService(BaseService):
-    from ..models import PracticeChecklist
-
 
     def create(self, obj):  # type: ignore[override]
         if not isinstance(obj, dict):
@@ -56,7 +54,6 @@ class PracticeChecklistService(BaseService):
 
 
 class PracticeChecklistItemService(BaseService):
-    from ..models import PracticeChecklistItem
 
     @exposed_action("write", groups=["practice_checklist_group_manager", "core_group_superadmin"])
     def set_done(self, id: int, done: bool = True, note: str | None = None) -> dict:

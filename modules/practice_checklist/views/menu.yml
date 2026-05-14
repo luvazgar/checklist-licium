@@ -9,9 +9,8 @@
 - model: ui.action
   ext_id: practice_checklist_action_checklists
   fields:
-    name: "Practice - Checklists"
-    title:
-      $fallback: "Checklists"
+    name: "practice_checklist_action_checklists"
+    title: "Administrar Checklists"
     route: practice/checklists
     model_key: practice_checklist.checklist
     model_path: "practice_checklist/checklist"
@@ -38,9 +37,8 @@
 - model: ui.action
   ext_id: practice_checklist_action_items
   fields:
-    name: "Practice - Items"
-    title:
-      $fallback: "Ítems"
+    name: "practice_checklist_action_items"
+    title: "Administrar Items"
     route: practice/checklist-items
     model_key: practice_checklist.checklist_item
     model_path: "practice_checklist/checklist_item"
@@ -59,7 +57,7 @@
 - model: ui.menuitem
   ext_id: practice_checklist_menu_items
   fields:
-    title: "Ítems"
+    title: "Items"
     icon: mdi-format-list-bulleted
     parent_id.ext_id: practice_checklist_menu_root
     action_id.ext_id: practice_checklist_action_items

@@ -1,9 +1,10 @@
 - model: ui.view
   ext_id: practice_checklist_view_checklist_list
   fields:
-    name: "practice_checklist.checklist - Lista"
+    name: "Checklists - Lista"
     title:
-      $fallback: "Checklists - Lista"
+      i18n_key: "practice_checklist.views.checklist_list"
+      $fallback: "Checklists - List"
     model_key: practice_checklist.checklist
     type_id.ext_id: ui.ui_view_type_list
     definition:
@@ -15,9 +16,21 @@
         - { field: is_public, label: Público, width: 90 }
         - { field: closed_at, label: Cerrado en }
       actions:
-        - { name: new, type: create, icon: mdi-plus, label: "Nuevo" }
-        - { name: edit, type: update, icon: mdi-pencil, label: "Editar" }
-        - { name: delete, type: delete, icon: mdi-delete, label: "Borrar" }
+        - name: new
+          type: create
+          icon: mdi-plus
+          label: "Nuevo Checklist"
+          i18n_key: "practice_checklist.checklist.actions.new"
+        - name: edit
+          type: update
+          icon: mdi-pencil
+          label: "Editar"
+          i18n_key: "practice_checklist.checklist.actions.edit"
+        - name: delete
+          type: delete
+          icon: mdi-delete
+          label: "Borrar"
+          i18n_key: "practice_checklist.checklist.actions.delete"
       row_actions:
         - key: close
           type: service
@@ -41,9 +54,10 @@
 - model: ui.view
   ext_id: practice_checklist_view_checklist_form
   fields:
-    name: "practice_checklist.checklist - Formulario"
+    name: "Checklist - Formulario"
     title:
-      $fallback: "Checklist - Formulario"
+      i18n_key: "practice_checklist.views.checklist_form"
+      $fallback: "Checklist - Form"
     model_key: practice_checklist.checklist
     type_id.ext_id: ui.ui_view_type_form
     definition:
@@ -75,9 +89,10 @@
 - model: ui.view
   ext_id: practice_checklist_view_item_list
   fields:
-    name: "practice_checklist.checklist_item - Lista"
+    name: "Items - Lista"
     title:
-      $fallback: "Ítems - Lista"
+      i18n_key: "practice_checklist.views.item_list"
+      $fallback: "Items - List"
     model_key: practice_checklist.checklist_item
     type_id.ext_id: ui.ui_view_type_list
     definition:
@@ -89,9 +104,46 @@
         - { field: is_done, label: Hecho, chip: true }
         - { field: done_at, label: Hecho en }
       actions:
-        - { name: new, type: create, icon: mdi-plus, label: "Nuevo" }
-        - { name: edit, type: update, icon: mdi-pencil, label: "Editar" }
-        - { name: delete, type: delete, icon: mdi-delete, label: "Borrar" }
+        - name: new
+          type: create
+          icon: mdi-plus
+          label: "Nuevo Item"
+          i18n_key: "practice_checklist.checklist_item.actions.new"
+        - name: edit
+          type: update
+          icon: mdi-pencil
+          label: "Editar"
+          i18n_key: "practice_checklist.checklist_item.actions.edit"
+        - name: delete
+          type: delete
+          icon: mdi-delete
+          label: "Borrar"
+          i18n_key: "practice_checklist.checklist_item.actions.delete"
+      bulk_actions:
+        - key: bulk_set_done
+          type: service
+          label: "Marcar como hechos"
+          icon: mdi-check-all
+          method: set_done
+          model_key: practice_checklist.checklist_item
+          groups: [practice_checklist_group_manager, core_group_superadmin]
+          params:
+            - name: done
+              label: Hecho
+              type: boolean
+              default: true
+        - key: bulk_set_pending
+          type: service
+          label: "Marcar como pendientes"
+          icon: mdi-undo-variant
+          method: set_done
+          model_key: practice_checklist.checklist_item
+          groups: [practice_checklist_group_manager, core_group_superadmin]
+          params:
+            - name: done
+              label: Hecho
+              type: boolean
+              default: false
       row_actions:
         - key: mark_done
           type: service
@@ -116,9 +168,10 @@
 - model: ui.view
   ext_id: practice_checklist_view_item_form
   fields:
-    name: "practice_checklist.checklist_item - Formulario"
+    name: "Ítem - Formulario"
     title:
-      $fallback: "Ítem - Formulario"
+      i18n_key: "practice_checklist.views.item_form"
+      $fallback: "Item - Form"
     model_key: practice_checklist.checklist_item
     type_id.ext_id: ui.ui_view_type_form
     definition:

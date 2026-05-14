@@ -1,0 +1,201 @@
+from __future__ import annotations
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, Boolean
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import UUID
+from app.core.base import Base
+from app.core.fields import field
+
+class Location(Base):
+
+    __tablename__ = "asset_lending_location"
+    __abstract__ = False
+    __model__ = "location"
+    __service__ = "modules.asset_lending.services.lending.LocationService"
+
+    name = field(String(100), required=True, public=True, editable=True)
+    description = field(Text, required=False, public=True, editable=True)
+
+    assets = relationship(
+        "modules.asset_lending.models.lending.Asset",
+        back_populates="location",
+        info={"public": False}
+    )
+
+
+    code = field(
+        String(50),
+        required=False,
+        public=True,
+        editable=True,
+        info = {"label": "Código de ubicación"}
+        )
+
+
+    is_active = field(
+        Boolean,
+        default=True,
+        required=True,
+        public=True,
+        info = {"label": "Activo"}
+        )
+
+
+
+class Asset(Base):
+    __tablename__ = "asset_lending_asset"
+    __abstract__ = False
+    __model__ = "asset"
+    __service__ = "modules.asset_lending.services.lending.AssetService"
+
+
+    name = field(
+        String(180),
+        required=True,
+        public=True,
+        editable=True,
+        info = {"label": "Nombre del asset"}
+        )
+
+
+
+    asset_code = field(
+        String(50),
+        required=True,
+        public=True,
+        editable=True,
+        info = {"label": "Código del asset"}
+        )
+
+
+    status = field(
+        String(20),
+        default="disponible",
+        required=True,
+        public=True,
+        editable=False,
+        info = {"label": "Estado", "choices": ["disponible", "prestado", "en mantenimiento", "retirado"]}
+    )
+
+
+    location_id = field(
+        Integer,
+        ForeignKey("asset_lending_location.id"),
+        required=True,
+        public=True,
+        info = {"label": "Ubicación"}
+    )
+
+
+    location = relationship(
+        "modules.asset_lending.models.lending.Location",
+        back_populates="assets",
+        info={"public": True, "recursive": False},
+    )
+
+
+    responsible_user_id = field(
+        UUID,
+        ForeignKey("core_user.id"),
+        required=False,
+        public=True,
+        info = {"label": "Usuario responsable"}
+    )
+
+
+    responsible_user = relationship(
+        "User",
+        info={"public": True, "recursive": False},
+    )
+
+
+    notes = field(
+        Text,
+        required=False,
+        public=True,
+        editable=True,
+        info = {"label": "Notas"}
+    )
+
+
+class Loan(Base):
+    __tablename__ = "asset_lending_loan"
+    __abstract__ = False
+    __model__ = "loan"
+    __service__ = "modules.asset_lending.services.lending.LoanService"
+
+    asset_id = field(
+        Integer,
+        ForeignKey("asset_lending_asset.id"),
+        required=True,
+        public=True,
+        info = {"label": "Asset prestado"}
+    )
+
+
+    asset = relationship(
+        "modules.asset_lending.models.lending.Asset",
+        info={"public": True, "recursive": False},
+    )
+
+
+    borrower_user_id = field(
+        UUID,
+        ForeignKey("core_user.id"),
+        required=True,
+        public=True,
+        info = {"label": "Usuario que toma prestado"}
+    )
+
+
+    borrower = relationship(
+        "User",
+        info={"public": True, "recursive": False},
+    )
+
+
+    checkout_at = field(
+        DateTime(timezone=True),
+        required=True,
+        public=True,
+        info = {"label": "Fecha de préstamo(dd/mm/aaaa)"}
+        )
+
+
+    due_at = field(
+        DateTime(timezone=True),
+        required=True,
+        public=True,
+        info = {"label": "Fecha de devolución(dd/mm/aaaa)"}
+        )
+
+
+    returned_at = field(
+        DateTime(timezone=True),
+        required=False,
+        public=True,
+        info = {"label": "Fecha de devolución(dd/mm/aaaa)"}
+        )
+
+
+    status = field(
+        String(20),
+        default="open",
+        required=True,
+        public=True,
+        info = {"label": "Estado"}
+    )
+
+
+    checkout_note = field(
+        Text,
+        required=False,
+        public=True
+        )
+
+
+    return_note = field(
+        Text,
+        required=False,
+        public=True,
+        info = {"label": "Nota de devolución"}
+    )

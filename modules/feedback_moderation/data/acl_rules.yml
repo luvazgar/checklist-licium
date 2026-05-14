@@ -1,0 +1,33 @@
+
+- model: core.aclrule
+  ext_id: feedback_acl_public_create_suggestion
+  fields:
+    model_key: "feedback_moderation.suggestion"
+    group_id.ext_id: feedback_group_viewer
+    perm_create: true
+
+
+- model: core.aclrule
+  ext_id: feedback_acl_public_create_comment
+  fields:
+    model_key: "feedback_moderation.comment"
+    group_id.ext_id: feedback_group_viewer
+    perm_create: true
+
+
+- model: core.aclrule
+  ext_id: feedback_acl_public_read_suggestion
+  fields:
+    model_key: "feedback_moderation.suggestion"
+    group_id.ext_id: feedback_group_viewer
+    perm_read: true
+    domain: "[('status','=','published'),('is_public','=',True)]"
+
+
+- model: core.aclrule
+  ext_id: feedback_acl_public_read_comment
+  fields:
+    model_key: "feedback_moderation.comment"
+    group_id.ext_id: feedback_group_viewer
+    perm_read: true
+    domain: "[('status','=','published'),('is_public','=',True)]"
